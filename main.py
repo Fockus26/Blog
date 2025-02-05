@@ -48,9 +48,6 @@ class Base(DeclarativeBase):
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, "instance", "posts.db")
 
-if not os.path.exists(os.path.join(BASE_DIR, "instance")):
-    os.makedirs(os.path.join(BASE_DIR, "instance"))
-
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DB_URL") 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
