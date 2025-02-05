@@ -44,10 +44,12 @@ gravatar = Gravatar(app,
 # CREATE DATABASE
 class Base(DeclarativeBase):
     pass
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DB_URL")
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, "instance", "posts.db")
+app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DB_PATH}"
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
-
 
 # CONFIGURE TABLES
 class BlogPost(db.Model):
@@ -287,4 +289,5 @@ def contact():
 
 
 if __name__ == "__main__":
-    app.run(debug=False, port=5000)
+    from waitress import serve
+    serve(app, host="0.0.0.0", port=8000)
