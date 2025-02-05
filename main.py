@@ -51,7 +51,9 @@ DB_PATH = os.path.join(BASE_DIR, "instance", "posts.db")
 if not os.path.exists(os.path.join(BASE_DIR, "instance")):
     os.makedirs(os.path.join(BASE_DIR, "instance"))
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DB_PATH}"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DB_URL") 
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
 
