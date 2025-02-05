@@ -47,6 +47,10 @@ class Base(DeclarativeBase):
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, "instance", "posts.db")
+
+if not os.path.exists(os.path.join(BASE_DIR, "instance")):
+    os.makedirs(os.path.join(BASE_DIR, "instance"))
+
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DB_PATH}"
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
