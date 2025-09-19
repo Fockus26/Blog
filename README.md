@@ -167,5 +167,3 @@ Este proyecto fue desarrollado como parte de un curso de Python para practicar c
 
 This project is licensed under the MIT License.
 Este proyecto está licenciado bajo la Licencia MIT.
-
----
