@@ -1,169 +1,112 @@
-# Blog App
+# 📝 Blog
 
-**English**
-
-A blogging web application built with **Flask (Python)**, **SQLite**, and **Bootstrap 5**.  
-
-**Español**
-
-Una aplicación web de blogging construida con **Flask (Python)**, **SQLite** y **Bootstrap 5**.
+A simple blogging platform built with Flask, SQLite, and Bootstrap 5.
 
 ---
 
-## 🌍 Overview / Descripción
+## 🌍 Overview
 
-**English**  
-Blog App is a simple but functional blogging platform. Users can register, log in, create blog posts using a rich-text editor (CKEditor), and manage their content by editing or deleting their posts. Visitors can also leave comments on individual posts.  
-
-**Español**  
-Blog App es una plataforma de blogging sencilla pero funcional. Los usuarios pueden registrarse, iniciar sesión, crear publicaciones usando un editor de texto enriquecido (CKEditor) y gestionar su contenido editando o eliminando sus posts. Los visitantes también pueden dejar comentarios en las publicaciones.  
+Blog App is a functional blogging web application where users can register, log in, and create blog posts using a rich-text editor (CKEditor). Posts can be managed through editing and deleting, while visitors can leave comments on individual entries. It was designed to practice core web development concepts with Flask, covering authentication, CRUD operations, and responsive UI.
 
 ---
 
-## ✨ Features / Características
+## ✨ Features
 
-**English**
-- 👤 User authentication (register/login/logout)  
-- 📝 Create, edit, and delete blog posts  
-- 💬 Comment system for posts  
-- 🎨 Responsive UI with **Bootstrap 5**  
-- 🖊️ Rich-text editor integration with **CKEditor**  
-- 💾 Lightweight database with **SQLite**  
+- 👤 User authentication (register/login/logout)
+- 📝 Create, edit, and delete blog posts
+- 💬 Comment system for posts
+- 🖊️ Rich-text editor integration with CKEditor
+- 🎨 Responsive UI with Bootstrap 5
+- 💾 Lightweight database with SQLite
 
-**Spanish**
-- 👤 Autenticacion de usuarios (registro/Iniciar Sesion/Cerrar Sesion)  
-- 📝 Crear, editar, y elimina publicaciones del blog  
-- 💬 Sistema de comentarios por publicacion
-- 🎨 Interfaz de usuario responsiva con **Bootstrap 5**  
-- 🖊️ Editor de texto enriquecido con **CKEditor**  
-- 💾 Base de datos ligera con **SQLite**  
+--- 
 
----
+## 🛠️ Tech Stack
 
-## 🛠️ Tech Stack / Tecnologías
-
-- **Backend:** Flask (Python)  
-- **Frontend:** Bootstrap 5, HTML, CSS, JS  
-- **Database:** SQLite  
-- **Libraries:** Flask-WTF, Flask-Login, Flask-SQLAlchemy, Flask-CKEditor  
+- **Backend:** Flask (Python)
+- **Frontend:** Bootstrap 5, HTML5, CSS3, JavaScript
+- **Database:** SQLite
+- **Libraries:** Flask-WTF, Flask-Login, Flask-SQLAlchemy, Flask-CKEditor
 
 ---
 
-## 📂 Project Structure / Estructura del Proyecto
-
+## 📂 Project Structure
 ```text
 Blog/
-│
-├── main.py
-├── forms.py
-|── 
+│── main.py
+│── forms.py
+│── requirements.txt
 │
 ├── static/
-│ ├── assets/
-│ │ ├── img/
-│ │ └── favicon.ico
-│ ├── css/
-│ │ └── styles.css
-│ └── js/
-│ └── scripts.js
+│   ├── assets/
+│   │   ├── img/
+│   │   └── favicon.ico
+│   ├── css/
+│   │   └── styles.css
+│   └── js/
+│       └── scripts.js
 │
 ├── templates/
-│ ├── about.html
-│ ├── contact.html
-│ ├── footer.html
-│ ├── header.html
-│ ├── index.html
-│ ├── login.html
-│ ├── make-post.html
-│ ├── post.html
-│ └── register.html
+│   ├── about.html
+│   ├── contact.html
+│   ├── footer.html
+│   ├── header.html
+│   ├── index.html
+│   ├── login.html
+│   ├── make-post.html
+│   ├── post.html
+│   └── register.html
 │
 └── README.md
 ```
+
 ---
 
-## ⚙️ Installation & Setup / Instalación y Configuración
+## 📸 Showcase
 
-### 1. Clone repo / Clonar repositorio
+_Coming soon – screenshots and demo will be added here._
+
+---
+
+## ⚙️ Installation & Setup
+
+### Clone repository
 ```bash
-git clone https://github.com/fockus26/BlogApp.git
+git clone https://github.com/fockus26/blog.git
 cd BlogApp
 ```
 
-### 2. Create virtual environment / Crear entorno virtual
+### Create virtual environment
 ```bash
 python -m venv venv
 source venv/bin/activate   # macOS/Linux
 venv\Scripts\activate      # Windows
 ```
-### 3. Install dependencies / Instalar dependencias
+
+### Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Run app / Ejecutar aplicación
+### Run application
 ```bash
 flask run
 ```
 
----
-
-## 🚀 Usage / Uso
-
-1. Register a new account / Regístrate con una nueva cuenta
-
-2. Log in to access the editor / Inicia sesión para acceder al editor
-
-3. Create, edit or delete blog posts / Crea, edita o elimina publicaciones
-
-4. Comment on posts / Escribe comentarios en los posts
-
-5. Explore blog content / Explora el contenido del blog
+App will run at: http://localhost:5000
 
 ---
 
-## 📖 Case Study / Estudio de Caso
+## 📖 Case Study
 
-**English**
-
-This project was developed as part of a Python course to practice web development concepts with Flask. It focuses on user authentication, CRUD operations, and template rendering with Bootstrap for responsive UI.
-
-**Español**
-
-Este proyecto fue desarrollado como parte de un curso de Python para practicar conceptos de desarrollo web con Flask. Se centra en autenticación de usuarios, operaciones CRUD y renderizado de plantillas con Bootstrap para una interfaz responsive.
+This project was developed as part of a Python learning path to strengthen backend and frontend integration with Flask. It emphasizes user authentication, CRUD operations for blog posts, and template rendering for dynamic UI. Although simple in scope, it represents a strong foundation for scalable blog applications.
 
 ---
 
-## 📈 Future Improvements / Mejoras Futuras
+## 📈 Future Improvements
 
-**English**
-
-- 🔐 Password reset functionality
-
-- 🖼️ Image upload for blog posts
-
-- 🗄️ Migration to PostgreSQL or MySQL
-
-- 📊 Admin panel for user and content management
-
-- 🌍 Deployment to Heroku or Render
-
-
-**Español**
-
-- 🔐 Funcionalidad de reiniciar contraseña
-
-- 🖼️ Subida de imagen para la publicaciones del blog
-
-- 🗄️ Migrar a PostgreSQL o MySQL
-
-- 📊 Panel de administrador para usuario y manejo de contenido
-
-- 🌍 Despliegue a Heroku o Render
-
----
-
-## 📜 License / Licencia
-
-This project is licensed under the MIT License.
-Este proyecto está licenciado bajo la Licencia MIT.
+- 🔐 Add password reset functionality
+- 🖼️ Enable image uploads for blog posts
+- 🗄️ Migrate to PostgreSQL or MySQL for scalability
+- 📊 Create an admin panel for user/content management
+- 🌍 Deploy to Heroku, Render, or other cloud hosting platforms
