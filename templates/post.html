@@ -1,5 +1,4 @@
-{% from "bootstrap5/form.html" import render_form %}
-{% include "header.html" %}
+{% from "bootstrap5/form.html" import render_form %} {% include "header.html" %}
 
 <!-- Page Header-->
 <header class="masthead" style="background-image: url('{{post.img_url}}')">
@@ -39,30 +38,27 @@
         {% endif %}
 
         <!-- Comments Area -->
-        <!-- Load the CKEditor -->
-        {{ ckeditor.load() }}
-        <!-- Configure it with the name of the form field from CommentForm -->
-        {{ ckeditor.config(name='comment_text') }}
-        <!-- Create the wtf quick form from CommentForm -->
-        {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+        {{ ckeditor.load() }} {{ ckeditor.config(name='comment_text') }} {% if
+        current_user.is_authenticated %}
+        <!-- Formulario visible solo para usuarios autenticados -->
+        {{ render_form(form, novalidate=True, button_map={"submit": "primary"})
+        }} {% endif %}
+
         <div class="comment">
           <ul class="commentList">
             <!-- Show all comments -->
-            {% for comment in post.comments: %}
+            {% for comment in post.comments %}
             <li>
               <div class="commenterImage">
-                <img
-                  src="{{ comment.comment_author.email | gravatar }}"
-                />
+                <img src="{{ comment.comment_author.email | gravatar }}" />
               </div>
               <div class="commentText">
-                {{comment.text|safe}}
-                <span class="sub-text">{{comment.comment_author.name}}</span>
+                {{ comment.text|safe }}
+                <span class="sub-text">{{ comment.comment_author.name }}</span>
               </div>
             </li>
             {% endfor %}
           </ul>
-
         </div>
       </div>
     </div>

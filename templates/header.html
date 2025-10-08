@@ -6,16 +6,26 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Angela's Blog</title>
+    <meta property="og:title" content="Cesar's Blog" />
+    <meta property="og:site_name" content="Cesar's Blog" />
+    <meta
+      property="og:description"
+      content="A simple blogging web application built with Flask, SQLite, and Bootstrap 5."
+    />
+    <meta
+      property="og:image"
+      content="https://blog-ten-virid-66.vercel.app/static/assets/screenshots/Preview.png"
+    />
+    <meta property="og:url" content="https://blog-ten-virid-66.vercel.app" />
+    <meta property="og:type" content="website" />
+    <title>Cesar's Blog</title>
     {% block styles %}
     <!-- Load Bootstrap-Flask CSS here -->
     {{ bootstrap.load_css() }}
     <link
       rel="icon"
       type="image/x-icon"
-      href="{{ url_for('static', filename='assets/favicon.ico') }}"
+      href="{{ url_for('static', filename='assets/icons/favicon.ico') }}"
     />
     <!-- Font Awesome icons (free version)-->
     <script
@@ -44,7 +54,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
       <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="/">Start Bootstrap</a>
+        <a class="navbar-brand" href="/">Cesar's Blog</a>
         <button
           class="navbar-toggler"
           type="button"

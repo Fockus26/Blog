@@ -12,8 +12,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 import os
 from dotenv import load_dotenv
-# Optional: add contact me email functionality (Day 60)
-# import smtplib
+from datetime import datetime 
+from urllib.parse import quote
 
 load_dotenv()
 
@@ -25,6 +25,9 @@ Bootstrap5(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+@app.context_processor
+def inject_now():
+    return {'now': datetime.now()}
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -46,6 +49,7 @@ class Base(DeclarativeBase):
     pass
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+print(BASE_DIR)
 DB_PATH = os.path.join(BASE_DIR, "instance", "posts.db")
 
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DB_URL") 
@@ -262,35 +266,23 @@ def delete_post(post_id):
 def about():
     return render_template("about.html", current_user=current_user)
 
-
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
+    if request.method == "POST":
+        name = request.form["name"]
+        email = request.form["email"]
+        phone = request.form["phone"]
+        message = request.form["message"]
+
+        # Crear mensaje URL-encoded
+        full_message = quote(f"Hola Cesar, soy {name}.\nEmail: {email}\nTeléfono: {phone}\n\nMensaje:\n{message}")
+
+        whatsapp_url = f"https://wa.me/584149771310?text={full_message}"
+        return redirect(whatsapp_url)
+    
     return render_template("contact.html", current_user=current_user)
 
-# Optional: You can include the email sending code from Day 60:
-# DON'T put your email and password here directly! The code will be visible when you upload to Github.
-# Use environment variables instead (Day 35)
-
-# MAIL_ADDRESS = os.environ.get("EMAIL_KEY")
-# MAIL_APP_PW = os.environ.get("PASSWORD_KEY")
-
-# @app.route("/contact", methods=["GET", "POST"])
-# def contact():
-#     if request.method == "POST":
-#         data = request.form
-#         send_email(data["name"], data["email"], data["phone"], data["message"])
-#         return render_template("contact.html", msg_sent=True)
-#     return render_template("contact.html", msg_sent=False)
-#
-#
-# def send_email(name, email, phone, message):
-#     email_message = f"Subject:New Message\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nMessage:{message}"
-#     with smtplib.SMTP("smtp.gmail.com") as connection:
-#         connection.starttls()
-#         connection.login(MAIL_ADDRESS, MAIL_APP_PW)
-#         connection.sendmail(MAIL_ADDRESS, MAIL_APP_PW, email_message)
-
-
 if __name__ == "__main__":
+    app.run(debug=True)
     from waitress import serve
     serve(app, host="0.0.0.0", port=8000)
