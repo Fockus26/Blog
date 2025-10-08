@@ -19,20 +19,13 @@ load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('FLASK_KEY')
+
 ckeditor = CKEditor(app)
 Bootstrap5(app)
-# Configure Flask-Login
-login_manager = LoginManager()
-login_manager.init_app(app)
 
 @app.context_processor
 def inject_now():
     return {'now': datetime.now()}
-
-@login_manager.user_loader
-def load_user(user_id):
-    return db.get_or_404(User, user_id)
-
 
 # For adding profile images to the comment section
 gravatar = Gravatar(app,
@@ -49,7 +42,6 @@ class Base(DeclarativeBase):
     pass
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-print(BASE_DIR)
 DB_PATH = os.path.join(BASE_DIR, "instance", "posts.db")
 
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DB_URL") 
@@ -73,7 +65,6 @@ class BlogPost(db.Model):
     img_url: Mapped[str] = mapped_column(String(250), nullable=False)
     # Parent relationship to the comments
     comments = relationship("Comment", back_populates="parent_post")
-
 
 # Create a User table for all your registered users
 class User(UserMixin, db.Model):
@@ -106,6 +97,14 @@ class Comment(db.Model):
 with app.app_context():
     db.create_all()
 
+# Configure Flask-Login
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    with app.app_context():
+      return db.session.get(User, int(user_id))
 
 # Create an admin-only decorator
 def admin_only(f):
@@ -119,6 +118,14 @@ def admin_only(f):
 
     return decorated_function
 
+
+@app.route('/')
+def get_all_posts():
+    # return render_template("index.html")
+    result = db.session.execute(db.select(BlogPost))
+    posts = result.scalars().all()
+
+    return render_template("index.html", all_posts=posts, current_user=current_user)
 
 # Register new users into the User database
 @app.route('/register', methods=["GET", "POST"])
@@ -179,13 +186,6 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('get_all_posts'))
-
-
-@app.route('/')
-def get_all_posts():
-    result = db.session.execute(db.select(BlogPost))
-    posts = result.scalars().all()
-    return render_template("index.html", all_posts=posts, current_user=current_user)
 
 
 # Add a POST method to be able to post comments
@@ -282,7 +282,7 @@ def contact():
     
     return render_template("contact.html", current_user=current_user)
 
-if __name__ == "__main__":
-    app.run(debug=True)
-    from waitress import serve
-    serve(app, host="0.0.0.0", port=8000)
+# if __name__ == "__main__":
+#     app.run(debug=True)
+    # from waitress import serve
+    # serve(app, host="0.0.0.0", port=8000)

@@ -1,9 +1,8 @@
 {
-    "builds": [
-      { "src": "main.py", "use": "@vercel/python" }
-    ],
-    "routes": [
-      { "src": "/(.*)", "dest": "main.py" }
-    ]
+  "builds": [{ "src": "main.py", "use": "@vercel/python" }],
+  "routes": [{ "src": "/(.*)", "dest": "main.py" }],
+  "env": {
+    "FLASK_KEY": "@flask_key",
+    "DB_URL": "@db_url"
   }
-  
+}
